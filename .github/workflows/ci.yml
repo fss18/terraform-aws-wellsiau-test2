@@ -1,0 +1,32 @@
+name: CI
+on:
+  pull_request:
+    branches: [develop, main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pull-requests: write
+  id-token: write
+jobs:
+  static-tests:
+    uses: wellsiau-abp-v2/central-repo/.github/workflows/tf-module-static-tests.yml@v1
+    with:
+      terraform-version: "1.14.8"  # Update to match your module's required_version
+      # run-build-step: true  # Uncomment if your module has application code (e.g., Lambda)
+    secrets: inherit
+
+  approve:
+    needs: static-tests
+    runs-on: ubuntu-latest
+    environment: functional-test
+    steps:
+      - name: Approved
+        run: echo "Static tests passed. Functional tests approved by reviewer."
+
+  functional-tests:
+    needs: approve
+    uses: wellsiau-abp-v2/central-repo/.github/workflows/tf-module-functional-tests.yml@v1
+    with:
+      terraform-version: "1.14.8"  # Update to match your module's required_version
+      # run-build-step: true  # Uncomment if your module has application code (e.g., Lambda)
+    secrets: inherit
