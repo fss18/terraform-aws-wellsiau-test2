@@ -13,10 +13,10 @@ jobs:
     with:
       terraform-version: "1.14.8"  # Update to match your module's required_version
       # run-build-step: true  # Uncomment if your module has application code (e.g., Lambda)
-    secrets: inherit
 
   approve:
     needs: static-tests
+    if: github.base_ref == 'main'
     runs-on: ubuntu-latest
     environment: functional-test
     steps:
@@ -25,6 +25,7 @@ jobs:
 
   functional-tests:
     needs: approve
+    if: github.base_ref == 'main'
     uses: wellsiau-abp-v2/central-repo/.github/workflows/tf-module-functional-tests.yml@v1
     with:
       terraform-version: "1.14.8"  # Update to match your module's required_version
