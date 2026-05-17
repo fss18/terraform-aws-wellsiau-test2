@@ -1,8 +1,8 @@
+<!-- BEGIN_TF_DOCS -->
 # Basic Example
 
 This example demonstrates the minimal configuration for using this module.
 
-<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |

@@ -1,8 +1,9 @@
-# terraform-aws-MODULE_NAME
+<!-- BEGIN_TF_DOCS -->
+# terraform-aws-MODULE\_NAME
 
 <!-- Update the title and description above with your module name and a brief overview -->
 
-This module deploys ... _(replace with your module description)_.
+This module deploys ... \_(replace with your module description)\_.
 
 ## Architecture
 
@@ -79,27 +80,7 @@ make test
 
 After creating a module from this template, configure the following in your GitHub repository:
 
-### 1. Default Branch: `develop`
-
-This template uses `develop` as the default branch. All PRs (including fork PRs) should target `develop`. The `main` branch is reserved for releases only.
-
-- **`develop`** — Integration branch. All PRs merge here. CI runs static tests and (for same-repo PRs) functional tests.
-- **`main`** — Release branch. Only tested, approved code from `develop` is merged here. Publication triggers on `VERSION` changes.
-
-**Flow:** Feature branch → PR to `develop` → merge → PR from `develop` to `main` → release.
-
-> **Note:** The default branch is a GitHub repository setting. When creating a new repo from this template, ensure `develop` is set as the default branch in **Settings** > **General** > **Default branch**.
-
-### 2. Functional Test Environment
-
-Create a `functional-test` GitHub environment with required reviewers:
-
-1. Go to **Settings** > **Environments** > **New environment**
-2. Name it `functional-test`
-3. Add required reviewers (e.g., your team)
-4. The CI workflow will pause for approval before running functional tests
-
-### 3. Publication Environment
+### 1. Publication Environment
 
 Create a `publication` GitHub environment with required reviewers:
 
@@ -108,7 +89,7 @@ Create a `publication` GitHub environment with required reviewers:
 3. Add required reviewers (e.g., your team or `@aws-ia/aws-ia`)
 4. The publication workflow will pause for approval before creating a release
 
-### 4. Branch Protection
+### 2. Branch Protection
 
 Enable branch protection on `main`:
 
@@ -117,7 +98,7 @@ Enable branch protection on `main`:
 3. Enable **Require review from Code Owners**
 4. Enable **Require status checks to pass before merging** and add "Static Tests"
 
-### 5. OIDC Federation for Functional Tests
+### 3. OIDC Federation for Functional Tests
 
 Functional tests use OIDC to assume an IAM role in your test AWS account:
 
@@ -125,7 +106,7 @@ Functional tests use OIDC to assume an IAM role in your test AWS account:
 2. Attach permissions needed to deploy your module's resources
 3. Store the role ARN as a repository secret named `AWS_OIDC_ROLE_ARN`
 
-### 6. Build Steps (Optional)
+### 4. Build Steps (Optional)
 
 If your module includes application code (e.g., Lambda functions with `requirements.txt`):
 
@@ -166,7 +147,6 @@ Edit `.config/functional_tests/post-entrypoint-helpers.sh` to clean up after tes
 rm -f tests/terraform.auto.tfvars
 ```
 
-<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -176,7 +156,9 @@ rm -f tests/terraform.auto.tfvars
 
 ## Providers
 
-No providers.
+| Name | Version |
+|------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.0.0 |
 
 ## Modules
 
@@ -184,7 +166,9 @@ No modules.
 
 ## Resources
 
-No resources.
+| Name | Type |
+|------|------|
+| [aws_s3_bucket.example](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket) | resource |
 
 ## Inputs
 
