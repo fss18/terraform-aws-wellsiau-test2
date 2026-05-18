@@ -46,4 +46,4 @@ jobs:
     #with:
     #  terraform-version: "1.14.8"  # Update to match your module's required_version
       # run-build-step: true  # Uncomment if your module has application code (e.g., Lambda)
-    secrets: inherit
+    #secrets: inherit
