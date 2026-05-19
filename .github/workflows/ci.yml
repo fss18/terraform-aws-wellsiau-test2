@@ -10,15 +10,15 @@ permissions:
 jobs:
   validate:
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request'
     steps:
       - name: Block fork PRs to main
-        if: github.base_ref == 'main' && github.event.pull_request.head.repo.full_name != github.repository
+        if: github.event_name == 'pull_request' && github.base_ref == 'main' && github.event.pull_request.head.repo.full_name != github.repository
         run: |
           echo "::error::Fork PRs must target the 'develop' or feature branch, not 'main'. Please change the base branch of this PR."
           exit 1
+
       - name: Block non-develop PRs to main
-        if: github.base_ref == 'main' && github.head_ref != 'develop'
+        if: github.event_name == 'pull_request' && github.base_ref == 'main' && github.head_ref != 'develop'
         run: |
           echo "::error::PRs to 'main' must originate from the 'develop' branch. Current source: '${{ github.head_ref }}'. Please merge to 'develop' first, then create a PR from 'develop' to 'main'."
           exit 1
