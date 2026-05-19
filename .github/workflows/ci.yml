@@ -17,6 +17,11 @@ jobs:
         run: |
           echo "::error::Fork PRs must target the 'develop' or feature branch, not 'main'. Please change the base branch of this PR."
           exit 1
+      - name: Block non-develop PRs to main
+        if: github.base_ref == 'main' && github.head_ref != 'develop'
+        run: |
+          echo "::error::PRs to 'main' must originate from the 'develop' branch. Current source: '${{ github.head_ref }}'. Please merge to 'develop' first, then create a PR from 'develop' to 'main'."
+          exit 1
 
   static-tests:
     needs: validate
