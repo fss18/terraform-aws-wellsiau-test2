@@ -1,6 +1,3 @@
-# Default owner for all files
-* @wellsiau-abp-v2/wellsiau-abp-admin
-
 # Require central team approval for security-sensitive paths
-.config/ @wellsiau-abp-v2/wellsiau-abp-admin
+.config/ @wellsiau-abp-v2/wellsiau-abp-internal-contributors
 .github/workflows/ @wellsiau-abp-v2/wellsiau-abp-admin
